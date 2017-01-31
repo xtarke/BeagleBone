@@ -1,15 +1,12 @@
-// PRUSS program to read ads1252
+// PRUSS program to read ads1252 (24 bit, 40k samples @ 16MHz)
 //
 // "P9.27" (pru0_pru_r30_5)     -> clock
 // "P9.28" (pru0_pru_r31_3)     -> Data in pin 
 // "P9.29" (pr1_pru0_pru_r31_1) -> Abort pin
 //
 //
-// that is connected to P9_28 (pru0_pru_r31_3 is pressed). This program 
-// was writen by Derek Molloy for the book Exploring BeagleBone
-// P9_29 pr1_pru0_pru_r31_1 input signal
 // -----------------------------------------------------------------------------------
-// This program is based on, he book "Exploring BeagleBone: Tools and 
+// This program is based on the book "Exploring BeagleBone: Tools and 
 // Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
 
 .origin 0                        // start of program in PRU memory
