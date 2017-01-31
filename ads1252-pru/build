@@ -1,0 +1,3 @@
+#!/bin/sh
+pasm -b ads1252.p
+gcc ads1252.c -o ads1252 -lpthread -lprussdrv

@@ -1,0 +1,51 @@
+/* Device Tree Overlay for enabling the pins and pru0 for 
+* ads1252 interface 
+* This overlay is based on, but updated for new kernel, the book "Exploring BeagleBone: Tools and 
+* Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
+* ISBN 9781118935125. Please see the file README.md in the repository root 
+* directory for copyright and GNU GPLv3 license information.
+*/
+/dts-v1/;
+/plugin/;
+
+/ {
+   compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+   part-number = "EBB-PRU-xtarke";
+   version = "00A0";
+
+   /* This overlay uses the following resources */
+   exclusive-use =
+         "P9.27", "P9.28", "P9.29",  "pru0";
+
+   fragment@0 {
+      target = <&am33xx_pinmux>;
+      __overlay__ {
+
+         pru_pru_pins: pinmux_pru_pru_pins {   // The PRU pin modes
+            pinctrl-single,pins = <
+               0x1a4 0x05  // P9_27 pr1_pru0_pru_r30_5, MODE5 | OUTPUT | PRU
+               0x19c 0x26  // P9_28 pr1_pru0_pru_r31_3, MODE6 | INPUT | PRU
+               0x194 0x26  // P9_29 pr1_pru0_pru_r31_1, MODE6 | INPUT | PRU
+            >;
+         };
+      };
+   };
+
+   fragment@1 {         // Enable the PRUSS
+      target = <&pruss>;
+      __overlay__ {
+         status = "okay";
+         pinctrl-names = "default";
+         pinctrl-0 = <&pru_pru_pins>;
+         my_pins {
+            pin-names = "abort", "clock", "datain";
+            gpios               = <&gpio3 19 0
+                                   &gpio3 17 0
+                                   &gpio3 15 0>;         
+         };
+      };
+   };
+
+};
+

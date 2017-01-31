@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Compiling the overlay from .dts to .dtbo"
+
+# dtc -O dtb -o EBB-PRU-Example-00A0.dtbo -b 0 -@ EBB-PRU-Example.dts
+# dtc -O dtb -o uio_pruss_enable-00A0.dtbo -b 0 -@ uio_pruss_enable-00A0.dts
+dtc -O dtb -o EBB-PRU-xtarke-00A0.dtbo -b 0 -@ EBB-PRU-xtarke.dts
+
